@@ -34,12 +34,20 @@ r = find_all_possible_states_from(original)
 print(r)
 print("---> End Test <---")
 
-
 # Depth First
 print()
 print("---> Begin Test <---")
 print("*** Depth First Search ***")
 original = [1,2,3,8,4,0,7,6,5]
 r = depth_first_search(original)
+print(r)
+print("---> End Test <---")
+
+# Breath First
+print()
+print("---> Begin Test <---")
+print("*** Breath First Search ***")
+original = [1,2,3,8,4,5,7,6,0]
+r = breath_first_search(original)
 print(r)
 print("---> End Test <---")
