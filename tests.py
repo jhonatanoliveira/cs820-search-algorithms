@@ -39,7 +39,7 @@ print("---> End Test <---")
 print()
 print("---> Begin Test <---")
 print("*** Depth First Search ***")
-original = [1,2,3,6,7,5,8,0,4]
+original = [1,2,3,8,4,0,7,6,5]
 r = depth_first_search(original)
 print(r)
 print("---> End Test <---")
