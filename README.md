@@ -5,16 +5,21 @@ This is the solution for Assignment 2 in CS820 - Artificial Intelligence.
 The solution proposes an implementation of 5 search algorithms for solving the 8-puzzle problem.
 Follows an overview for each implemented algorithm:
 
-1) Depth-first search (DFS) is an algorithm for traversing a graph. It starts at the root and explores as deep as possible along each branch before backtracking.
-2) Breadth-first search (BFS) is an algorithm for traversing a graph. It starts at the root and explores the neighbor nodes first, before moving to the next level neighbors.
-3) Best-first search with heuristic being number of tiles out of place.
-4) Best-first search with heuristic being minimum number of moves to reach the goal state.
-5) Best-first search with heuristic being the total distance and sequence score.
+* Depth-first search (DFS) is an algorithm for traversing a graph. It starts at the root and explores as deep as possible along each branch before backtracking.
+
+* Breadth-first search (BFS) is an algorithm for traversing a graph. It starts at the root and explores the neighbor nodes first, before moving to the next level neighbors.
+
+* Best-first search with heuristic being number of tiles out of place.
+
+* Best-first search with heuristic being minimum number of moves to reach the goal state.
+
+* Best-first search with heuristic being the total distance and sequence score.
+
   - The "total distance" of the eight tiles in a board position from their "home squares". We use the Manhattan distance to calculate the distance of each tile from its home square.
   - The "sequence score" that measures the degree to which the tiles are already ordered in the current position with respect to the order required in the goal configuration.
 
 
-There are 5 files in this solution:
+There are 6 files in this solution:
   - main.py: utility script with a simple user menu for running an initial state with a chosen search algorithm.
   - searches.py: search algorithm implementations.
   - README: overview and instructions
@@ -22,7 +27,7 @@ There are 5 files in this solution:
   - utilities.py: shared utility functions.
   - tests.py: helper script for demonstrating functions.
 
-You can also find this solution in the following [GitHub repository](https://github.com/jhonatanoliveira/cs820-strips-8-puzzle).
+You can also find this solution in the following [GitHub repository](https://github.com/jhonatanoliveira/cs820-search-algorithms).
 
 
 Requirements
@@ -37,15 +42,15 @@ How it Works
 
 Functions can be called from the ```searches.py``` file individually or an user can use the ```main.py``` script helper for a simple menu navigation.
 Notice that all state input is *comma separated* and with numbers filling the board from *top* to *down* and from *left* to *right* and *number zero* representing the clear block.
-For example, an initial state 1,2,3,0,6,4,8,7,5 represents the following board configuration:
+For example, an initial state ```1,2,3,0,6,4,8,7,5``` represents the following board configuration:
 
 |   |   |   |
 |---|---|---|
 | 1 | 2 | 3 |
-|   | 6 | 4 |
+| X | 6 | 4 |
 | 8 | 7 | 5 |
 
-where the X is the clear block.
+where the *X* is the clear block.
 
 
 
@@ -83,7 +88,11 @@ Users can keep running the menu as long as they want by typing "Y" or "y" at the
 AUTHOR
 ---------
 Jhonatan S. Oliveira,
+
 oliveira@uregina.ca,
+
 Department of Computer Science,
+
 University of Regina,
+
 Canada
