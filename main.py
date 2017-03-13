@@ -82,6 +82,8 @@ def main():
     if result:
       print(">>> Result:")
       print(result)
+      print(">>> Number of generated nodes:")
+      print(len(result))
     else:
       print(">>> Not a valid choice.")
 
