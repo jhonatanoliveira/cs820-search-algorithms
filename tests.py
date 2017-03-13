@@ -38,7 +38,7 @@ print("---> End Test <---")
 print()
 print("---> Begin Test <---")
 print("*** Depth First Search ***")
-original = [1,2,3,8,4,0,7,6,5]
+original = [1,2,3,8,5,6,7,4,0]
 r = depth_first_search(original)
 print(r)
 print("---> End Test <---")
@@ -47,7 +47,34 @@ print("---> End Test <---")
 print()
 print("---> Begin Test <---")
 print("*** Breath First Search ***")
-original = [1,2,3,8,4,5,7,6,0]
+original = [1,2,3,8,5,6,7,4,0]
 r = breath_first_search(original)
+print(r)
+print("---> End Test <---")
+
+# Best first search 1
+print()
+print("---> Begin Test <---")
+print("*** Best First Search 1 ***")
+original = [1,2,3,8,5,6,7,4,0]
+r = best_first_search_1(original)
+print(r)
+print("---> End Test <---")
+
+# Best first search 2
+print()
+print("---> Begin Test <---")
+print("*** Best First Search 2 ***")
+original = [1,2,3,8,5,6,7,4,0]
+r = best_first_search_2(original)
+print(r)
+print("---> End Test <---")
+
+# Best first search 3
+print()
+print("---> Begin Test <---")
+print("*** Best First Search 3 ***")
+original = [1,2,3,8,5,6,7,4,0]
+r = best_first_search_3(original)
 print(r)
 print("---> End Test <---")
