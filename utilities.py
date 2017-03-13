@@ -58,7 +58,7 @@ def find_all_possible_states_from(state):
 
   # Try left
   left_pos = empty_pos - 1
-  if left_pos > 0 and (set([empty_pos,left_pos]) in adjacent_positions):
+  if left_pos >= 0 and (set([empty_pos,left_pos]) in adjacent_positions):
     all_possible_states.append( swap_state(state, empty_pos, left_pos) )
 
   # Try right
@@ -68,7 +68,7 @@ def find_all_possible_states_from(state):
 
   # Try top
   top_pos = empty_pos - 3
-  if top_pos > 0 and (set([empty_pos,top_pos]) in adjacent_positions):
+  if top_pos >= 0 and (set([empty_pos,top_pos]) in adjacent_positions):
     all_possible_states.append( swap_state(state, empty_pos, top_pos) )
 
   # Try bottom

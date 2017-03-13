@@ -150,20 +150,17 @@ def best_first_search_1(initial_state, goal_state=GOAL_STATE):
   graph = Graph(directed = True, root = initial_state)
   # Uses a priority queue for a best search algorithm
   stack = queue.PriorityQueue()
-  stack.put((0,initial_state))
+  stack.put((0,initial_state,0))
   visited = []
   found_goal = False
 
-  depth_counter = 0
-
   while (stack.qsize() > 0) and (not found_goal):
 
-    priority, current_state = stack.get(block=False)
+    priority, current_state, depth_counter = stack.get(block=False)
 
     if not current_state in visited:
 
       visited.append(current_state)
-      depth_counter += 1
 
       all_possible_states = find_all_possible_states_from(current_state)
 
@@ -176,7 +173,7 @@ def best_first_search_1(initial_state, goal_state=GOAL_STATE):
         priority = depth_counter + out_of_place
 
         graph.add_edge(current_state, poss_state)
-        stack.put((priority, poss_state))
+        stack.put((priority, poss_state, depth_counter + 1))
         if poss_state == goal_state:
           visited.append(poss_state)
           found_goal = True
@@ -202,20 +199,17 @@ def best_first_search_2(initial_state, goal_state=GOAL_STATE):
   graph = Graph(directed = True, root = initial_state)
   # Uses a priority queue for a best search algorithm
   stack = queue.PriorityQueue()
-  stack.put((0,initial_state))
+  stack.put((0,initial_state,0))
   visited = []
   found_goal = False
 
-  depth_counter = 0
-
   while (stack.qsize() > 0) and (not found_goal):
 
-    priority, current_state = stack.get(block=False)
+    priority, current_state, depth_counter = stack.get(block=False)
 
     if not current_state in visited:
 
       visited.append(current_state)
-      depth_counter += 1
 
       all_possible_states = find_all_possible_states_from(current_state)
 
@@ -245,7 +239,7 @@ def best_first_search_2(initial_state, goal_state=GOAL_STATE):
         priority = depth_counter + total_distance
 
         graph.add_edge(current_state, poss_state)
-        stack.put((priority, poss_state))
+        stack.put((priority, poss_state, depth_counter + 1))
         if poss_state == goal_state:
           visited.append(poss_state)
           found_goal = True
@@ -275,20 +269,17 @@ def best_first_search_3(initial_state, goal_state=GOAL_STATE):
   graph = Graph(directed = True, root = initial_state)
   # Uses a priority queue for a best search algorithm
   stack = queue.PriorityQueue()
-  stack.put((0,initial_state))
+  stack.put((0,initial_state,0))
   visited = []
   found_goal = False
 
-  depth_counter = 0
-
   while (stack.qsize() > 0) and (not found_goal):
 
-    priority, current_state = stack.get(block=False)
+    priority, current_state, depth_counter = stack.get(block=False)
 
     if not current_state in visited:
 
       visited.append(current_state)
-      depth_counter += 1
 
       all_possible_states = find_all_possible_states_from(current_state)
 
@@ -327,7 +318,7 @@ def best_first_search_3(initial_state, goal_state=GOAL_STATE):
         priority = depth_counter + H
 
         graph.add_edge(current_state, poss_state)
-        stack.put((priority, poss_state))
+        stack.put((priority, poss_state, depth_counter + 1))
         if poss_state == goal_state:
           visited.append(poss_state)
           found_goal = True
