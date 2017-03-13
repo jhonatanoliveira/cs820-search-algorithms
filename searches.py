@@ -1,16 +1,72 @@
+# searches.py
+#
+# AUTHOR
+# ---------
+# Jhonatan S. Oliveira
+# oliveira@uregina.ca
+# Department of Computer Science
+# University of Regina
+# Canada
+#
+#
+# DESCRIPTION
+# -----------
+# We propose a solution for the 8-puzzle problem using 5 search algorithms: depth first search, breath first search, best first search with 3 different heuristics. Follows their description below:
+# 1) Depth-first search (DFS) is an algorithm for traversing a graph. It starts at the root and explores as deep as possible along each branch before backtracking.
+# 2) Breadth-first search (BFS) is an algorithm for traversing a graph. It starts at the root and explores the neighbor nodes first, before moving to the next level neighbors.
+# 3) Best-first search with heuristic being number of tiles out of place.
+# 4) Best-first search with heuristic being minimum number of moves to reach the goal state.
+# 5) Best-first search with heuristic being the total distance and sequence score.
+#   5.1) The "total distance" of the eight tiles in a board position from their "home squares". We use the Manhattan distance to calculate the distance of each tile from its home square.
+#   5.2) The "sequence score" that measures the degree to which the tiles are already ordered in the current position with respect to the order required in the goal configuration.
+#
+#
+# IMPLEMENTATION STRUCTURES
+# -------------------------
+# - Initial state
+#   A list with 9 numbers. 
+#   The order in the list represents the game board from left to right and from top to bottom. 
+#   The number zero represents the empty block.
+#   For example,
+#     [1,2,3,8,5,6,7,4,0]
+#   represents the following board game configuration:
+#     1 | 2 | 3
+#     ----------
+#     8 | 5 | 6
+#     ----------
+#     7 | 4 |   
+
+
+
+# General purposes libraries
 from collections import deque
 import queue
-
+# Local libraries
 from graphs import Graph
 from utilities import *
 
 
+
+# Constant representing the goal state
 GOAL_STATE = [1,2,3,8,0,4,7,6,5]
 
 
+
 def depth_first_search(initial_state, goal_state=GOAL_STATE):
+  """
+  Description
+  -----------
+  Implements the depth first search algorithm.
+  
+  Example
+  -------
+  >>> initial_state = [1,2,3,8,5,6,7,4,0]
+  >>> depth_first_search(initial_state)
+  [[1, 2, 3, 8, 5, 6, 7, 4, 0], [1, 2, 3, 8, 5, 0, 7, 4, 6], ... ]
+  """
   
   graph = Graph(directed = True, root = initial_state)
+  # Uses a stack for the depth first search
   stack = [initial_state]
   visited = []
   found_goal = False
@@ -38,8 +94,20 @@ def depth_first_search(initial_state, goal_state=GOAL_STATE):
 
 
 def breath_first_search(initial_state, goal_state=GOAL_STATE):
+  """
+  Description
+  -----------
+  Implements the breath first search algorithm.
+  
+  Example
+  -------
+  >>> initial_state = [1,2,3,8,5,6,7,4,0]
+  >>> breath_first_search(initial_state)
+  [[1, 2, 3, 8, 5, 6, 7, 4, 0], [1, 2, 3, 8, 5, 6, 7, 0, 4], [1, 2, 3, 8, 5, 0, 7, 4, 6], [1, 2, 3, 8, 5, 6, 0, 7, 4], ... ]
+  """
   
   graph = Graph(directed = True, root = initial_state)
+  # Using a queue for the breath first search
   queue = deque([initial_state])
   visited = []
   found_goal = False
@@ -65,10 +133,22 @@ def breath_first_search(initial_state, goal_state=GOAL_STATE):
   return visited
 
 
-# Tiles out of place
+
 def best_first_search_1(initial_state, goal_state=GOAL_STATE):
+  """
+  Description
+  -----------
+  Best search algorithm using the number of tiles out of place as heuristic.
+  
+  Example
+  -------
+  >>> initial_state = [1,2,3,8,5,6,7,4,0]
+  >>> best_first_search_1(initial_state)
+  [[1, 2, 3, 8, 5, 6, 7, 4, 0], [1, 2, 3, 8, 5, 0, 7, 4, 6], [1, 2, 3, 8, 0, 5, 7, 4, 6], ... ]
+  """
   
   graph = Graph(directed = True, root = initial_state)
+  # Uses a priority queue for a best search algorithm
   stack = queue.PriorityQueue()
   stack.put((0,initial_state))
   visited = []
@@ -87,7 +167,7 @@ def best_first_search_1(initial_state, goal_state=GOAL_STATE):
 
       all_possible_states = find_all_possible_states_from(current_state)
 
-      # Compute priority
+      # Compute priority based on the heuristic
       for poss_state in all_possible_states:
         out_of_place = 0
         for pos,block in enumerate(poss_state):
@@ -106,11 +186,21 @@ def best_first_search_1(initial_state, goal_state=GOAL_STATE):
 
 
 
-
-# Min number of moves
 def best_first_search_2(initial_state, goal_state=GOAL_STATE):
+  """
+  Description
+  -----------
+  Best search algorithm using the minimum number moves to reach the goal state as heuristic.
+  
+  Example
+  -------
+  >>> initial_state = [1,2,3,8,5,6,7,4,0]
+  >>> best_first_search_2(initial_state)
+  [[1, 2, 3, 8, 5, 6, 7, 4, 0], [1, 2, 3, 8, 5, 6, 7, 0, 4], [1, 2, 3, 8, 5, 6, 0, 7, 4], ... ]
+  """
   
   graph = Graph(directed = True, root = initial_state)
+  # Uses a priority queue for a best search algorithm
   stack = queue.PriorityQueue()
   stack.put((0,initial_state))
   visited = []
@@ -129,7 +219,7 @@ def best_first_search_2(initial_state, goal_state=GOAL_STATE):
 
       all_possible_states = find_all_possible_states_from(current_state)
 
-      # Compute priority
+      # Compute priority based on the heuristic
       total_distance = 0
       for poss_state in all_possible_states:
         for pos,block in enumerate(poss_state):
@@ -168,8 +258,22 @@ def best_first_search_2(initial_state, goal_state=GOAL_STATE):
 
 # Heuristic H
 def best_first_search_3(initial_state, goal_state=GOAL_STATE):
+  """
+  Description
+  -----------
+  Best search algorithm using the total distance and sequence score as heuristic.
+  The "total distance" of the eight tiles in a board position from their "home squares". We use the Manhattan distance to calculate the distance of each tile from its home square.
+  The "sequence score" that measures the degree to which the tiles are already ordered in the current position with respect to the order required in the goal configuration.
+  
+  Example
+  -------
+  >>> initial_state = [1,2,3,8,5,6,7,4,0]
+  >>> best_first_search_3(initial_state)
+  [[1, 2, 3, 8, 5, 6, 7, 4, 0], [1, 2, 3, 8, 5, 6, 7, 0, 4], [1, 2, 3, 8, 5, 6, 0, 7, 4], ... ]
+  """
   
   graph = Graph(directed = True, root = initial_state)
+  # Uses a priority queue for a best search algorithm
   stack = queue.PriorityQueue()
   stack.put((0,initial_state))
   visited = []
@@ -188,7 +292,7 @@ def best_first_search_3(initial_state, goal_state=GOAL_STATE):
 
       all_possible_states = find_all_possible_states_from(current_state)
 
-      # Compute priority
+      # Compute priority based on the heuristic
       total_distance = 0
       seq = 0
       H = 0
